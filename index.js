@@ -32,8 +32,8 @@ function mongo(req,res){
 	// return all Pokemon names
 	MongoClient.connect('mongodb://tectonic:2birds2stones@ds017258.mlab.com/seismic-test', function(err, db) {
 		if(err) throw err;
-		var collection = db.collection('new');
-		var query=collection.find();
-		res.render('pages/db',query);
+		// var collection = db.collection('new');
+		// var query=collection.find();
+		res.render('pages/db',{name:"Paxorus"});
 	});
 }

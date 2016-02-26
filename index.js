@@ -1,4 +1,4 @@
-var cool = require('cool-ascii-faces');
+// var cool = require('cool-ascii-faces');
 var express = require('express');
 var app = express();
 var MongoClient = require('mongodb').MongoClient;
@@ -22,6 +22,7 @@ app.get('/cool', function(request, response) {
 
 app.get('/db', function(req,res){
 	mongo(req,res);
+	// res.render('pages/db',{name:"Paxorus"});
 });
 
 app.listen(app.get('port'), function() {
@@ -30,10 +31,58 @@ app.listen(app.get('port'), function() {
 
 function mongo(req,res){
 	// return all Pokemon names
-	MongoClient.connect('mongodb://tectonic:2birds2stones@ds017258.mlab.com/seismic-test', function(err, db) {
-		if(err) throw err;
-		// var collection = db.collection('new');
-		// var query=collection.find();
-		res.render('pages/db',{name:"Paxorus"});
+	// var mongoConn=new MongoConn('seismic-test','new');
+	// mongoConn.find(function(docs){
+	// 	res.render('pages/db',{name:""+docs.length});
+	// });
+	var mongoConn=new MongoConn('seismic-test','new',function(docs){
+		res.render('pages/db',docs[0]);
 	});
 }
+
+function MongoConn(dbName,collName,render){
+	// this.queue=new Queue();
+	var x=this;
+	MongoClient.connect('mongodb://tectonic:2birds2stones@ds017258.mlab.com:17258/'+dbName, function(err, db) {
+		if(err) throw err;
+		x.db=db;
+		x.collection=db.collection(collName);
+		x.findBack(render);
+		// this.queue.next();
+	});
+
+	// this.find=function(render){
+	// 	this.queue.wait(function(render){findBack(render)});
+	// }
+
+	this.findBack=function(render){
+		var docs=[];
+		var cursor=x.collection.find();
+		cursor.each(function(err,doc){
+			if(err) throw err;
+			if(doc!=null){
+				docs.push(doc);
+			}else{
+				x.db.close();
+				render(docs);
+			}
+		});
+		// this.queue.next();
+	}
+
+
+}
+
+// function Queue(){
+// 	this.array=[];
+
+// 	this.wait=function(callback){
+// 		this.array.push(callback);
+// 	}
+
+// 	this.next=function(){
+// 		if(array.length==0) return;
+// 		var func=unshift(this.array);
+// 		func();
+// 	}
+// }

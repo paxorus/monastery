@@ -10,12 +10,13 @@
 
 <div class="container">
 <h2>Database Results</h2>
-
+<%= name %> 
 <ul>
-    <% results.forEach(function(r) { %>
-        <li><%= r.id %> - <%= r.name %></li>
+    <% pokemon.forEach(function(p) { %>
+        <li><%= p %></li>
     <% }); %>
 </ul>
+
 
 </div>
 

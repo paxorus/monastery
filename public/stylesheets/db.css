@@ -1,0 +1,11 @@
+/* Prakhar Sahay 02/26/2016 */
+
+li{
+	color:#08F;
+	font-weight:bold;
+	cursor:pointer;
+}
+li.unconfirmed{
+	color:#0C0;
+	font-weight:normal;
+}

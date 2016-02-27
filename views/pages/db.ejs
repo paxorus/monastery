@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <% include ../partials/header.ejs %>
+    <% include ../partials/header.ejs %>
+	<title>SeismicJS</title>
+	<link rel="stylesheet" href="/stylesheets/db.css">
 </head>
 
 <body>
@@ -9,17 +11,23 @@
 <% include ../partials/nav.ejs %>
 
 <div class="container">
-<h2>Database Results</h2>
-<%= name %> 
-<% pokemon.forEach(function(p) { %>
-    <li><%= p %></li>
-<% }); %>
-<ul>
+	<h2>Database Results</h2>
+	<ul id="name_list">
+	<% docs.forEach(function(doc) { %>
+	    <li><%= doc.name %></li>
+	<% }); %>
+	</ul>
 
-</ul>
-
+	<br />
+	<h2>Add Pokemon</h2>
+	<input placeholder="Swampert" id="add">
+	<button onclick="put_pokemon()">Add</button>
 
 </div>
+
+
+<script src="/javascripts/jquery.min.js"></script>
+<script src="/javascripts/pokemon_ajax.js"></script>
 
 </body>
 </html>

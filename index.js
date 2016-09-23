@@ -46,6 +46,25 @@ app.put('/db', function(req,res){
 	});
 });
 
+app.delete('/db', function(req,res){
+	// read in PUT body
+	var body=[];
+	req.on("data",function(chunk){
+		body.push(chunk);
+	}).on("end",function(){
+		body=Buffer.concat(body).toString();
+		var data=querystring.parse(body);
+		new MongoHelper({
+			db:'seismic-test',
+			collection:'new',
+			operation:'delete',
+			data:data,
+			then:function(success){res.send(success)}
+		});
+	});
+});
+
+
 app.listen(app.get('port'), function() {
 	console.log('Node app is running on port', app.get('port'));
 });
@@ -70,7 +89,7 @@ function MongoHelper(params){
 				case "insert":helper.insert();break;
 				case "find":helper.find();break;
 				case "post":break;
-				case "remove":break;
+				case "delete":helper.delete();break;
 			}
 		});
 	}
@@ -89,6 +108,13 @@ function MongoHelper(params){
 	}
 	this.insert=function(){
 		this.collection.insertOne({name:params.data.name},function(err,result){
+			if(err) throw err;
+			helper.db.close();
+			params.then(result);
+		});
+	}
+	this.delete=function(){
+		this.collection.deleteOne({name:params.data.name},function(err,result){
 			if(err) throw err;
 			helper.db.close();
 			params.then(result);

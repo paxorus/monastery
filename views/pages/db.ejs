@@ -14,20 +14,30 @@
 	<h2>Database Results</h2>
 	<ul id="name_list">
 	<% docs.forEach(function(doc) { %>
-	    <li><%= doc.name %></li>
+	    <li draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd(event)"><%= doc.name %></li>
 	<% }); %>
 	</ul>
 
 	<br />
-	<h2>Add Pokemon</h2>
-	<input placeholder="Swampert" id="add">
-	<button onclick="put_pokemon()">Add</button>
+	<h2>Add Item</h2>
+	<input placeholder="hydrogen" id="addInput">
+	<div onclick="putItem()" id="add">Add</div>
+
+	<h2>Delete Item</h2>
+	<div id="delete" ondrop="deleteItem(event)" ondragover="event.preventDefault()"></div>
 
 </div>
 
 
 <script src="/javascripts/jquery.min.js"></script>
-<script src="/javascripts/pokemon_ajax.js"></script>
+<script src="/javascripts/ajax.js"></script>
+<script>
+	document.addEventListener("keydown",function(ev){
+		if(ev.keyCode==13){
+			putItem();
+		}
+	});
+</script>
 
 </body>
 </html>

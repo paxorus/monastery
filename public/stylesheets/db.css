@@ -9,3 +9,15 @@ li.unconfirmed{
 	color:#0C0;
 	font-weight:normal;
 }
+li.deleting{
+	color:#F66;
+	font-weight:bold;
+}
+li#motion{
+	opacity:0.5;
+}
+
+#add{line-height:20px;color:white;background-color:#08F;height:26px;display:inline-block;padding:3px 6px}
+#add:hover{cursor:pointer;}
+#delete{opacity:0.3;background-color:red;height:80px;width:300px;}
+#delete:hover{opacity:0.5;}

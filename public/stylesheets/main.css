@@ -1,27 +1,85 @@
-.jumbotron {
-  background: #532F8C;
-  color: white;
-  padding-bottom: 80px; }
-  .jumbotron .btn-primary {
-    background: #845ac7;
-    border-color: #845ac7; }
-    .jumbotron .btn-primary:hover {
-      background: #7646c1; }
-  .jumbotron p {
-    color: #d9ccee;
-    max-width: 75%;
-    margin: 1em auto 2em; }
-  .navbar + .jumbotron {
-    margin-top: -20px; }
-  .jumbotron .lang-logo {
-    display: block;
-    background: #B01302;
-    border-radius: 50%;
-    overflow: hidden;
-    width: 100px;
-    height: 100px;
-    margin: auto;
-    border: 2px solid white; }
-    .jumbotron .lang-logo img {
-      max-width: 100%; }
+body {
+  margin: 0;
+  font-family: 'Hind', sans-serif;
+}
 
+#nav {
+  background-color: #2a2a2a;
+  padding-left: 50px;
+}
+
+#nav a {
+  color: #9d9d9d; 
+}
+
+#nav a div {
+  display: inline-block;
+  padding: 10px 15px;
+  font-size: 20px;
+}
+
+#nav a div:hover {
+  color: #33cc33;
+  cursor: pointer;
+  background-color: #000000;
+}
+
+#nav a div:active {
+  color: #0088ff;
+}
+
+.container {
+  width: 90%;
+  margin: 25px 5% 0 5%;
+}
+
+/* BRANCH */
+
+/* fields must be type="text" explicitly */
+input[type=text], textarea, button[type=button] {
+  font-family: 'Hind', sans-serif;
+  padding: 10px;
+  font-size: 24px;
+  border: 2px solid rgba(0, 0, 0, 0);
+  border-radius: 5px;
+  width: 95%;
+  cursor: pointer;
+  outline: none;
+}
+
+textarea {
+  resize: vertical;
+}
+
+input[type=text]:focus, textarea:focus{
+  border: 2px solid #33cc33;
+  outline: none;
+  color: #33cc33;
+  cursor: text;
+}
+
+button[type=button] {
+  background-color: #33cc33;
+  width: 50%;
+  color: white;
+}
+
+button[type=button]:active {
+  background-color: #0088ff;
+}
+
+/* LEAF */
+.container > div {
+  font-size: 24px;
+}
+
+
+
+#nav a, .noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;   /* Chrome/Safari/Opera */
+  -moz-user-select: none;      /* Firefox */
+  -ms-user-select: none;       /* Internet Explorer/Edge */
+  user-select: none;           /* Non-prefixed version, currently
+                                  not supported by any browser */
+}

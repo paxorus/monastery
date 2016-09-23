@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include ../partials/header.ejs %>
+	<title>SeismicJS</title>
+	<link rel="stylesheet" href="/stylesheets/db.css">
+</head>
+
+<body>
+
+<% include ../partials/nav.ejs %>
+
+<div class="container">
+	<div style="font-size:32px">Open</div>
+	<!-- edit fields on click -->
+	<div id="title"></div>
+	<br />
+	<div id="description""></div>
+	<center><button type="button" id="submit">Visit Parent</button></center>
+
+</div>
+
+
+<script src="/javascripts/jquery.min.js"></script>
+<script src="/javascripts/ajax.js"></script>
+<script>
+
+	var obj = load();
+	$(".container div").text(obj.issues[0].status);
+	$("#description").text(obj.issues[0].description);
+	$("#title").text(obj.issues[0].title);
+	// list children
+	// go to parent
+
+	function load() {
+		console.log()
+		return JSON.parse(localStorage.data);
+	}
+
+	function store(x) {
+		localStorage.data = JSON.stringify(x);
+	}
+</script>
+
+</body>
+</html>

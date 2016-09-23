@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include ../partials/header.ejs %>
+	<title>SeismicJS</title>
+	<link rel="stylesheet" href="/stylesheets/db.css">
+</head>
+
+<body>
+
+<% include ../partials/nav.ejs %>
+
+<div class="container">
+	<div style="font-size:32px">Open a new issue</div>
+
+	<form>
+		<input type="text" id="title" placeholder="Title">
+		<br />
+		<textarea id="description" placeholder="Describe the issue..." rows="4"></textarea>
+		<center><button type="button" id="submit">Create Issue</button></center>
+	</form>
+</div>
+
+
+<script src="/javascripts/jquery.min.js"></script>
+<script src="/javascripts/ajax.js"></script>
+<script>
+	// store({issues: []})
+
+	$("#submit").click(function (evt) {
+
+		// do validity check, mark empty fields
+		// blurring should also correct invalid chars
+
+		var obj = load();
+		obj.issues.push({
+			title: $("#title").val(),
+			description: $("#description").val(),
+			status: "open"
+		});
+		store(obj);
+
+		// load its leaf page
+	});
+
+	function load() {
+		console.log()
+		return JSON.parse(localStorage.data);
+	}
+
+	function store(x) {
+		localStorage.data = JSON.stringify(x);
+	}
+
+</script>
+
+</body>
+</html>

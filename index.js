@@ -19,6 +19,18 @@ app.get('/', function(request, response) {
 	response.render('pages/index');
 });
 
+app.get('/forest', function(request, response) {
+	response.render('pages/forest');
+});
+
+app.get('/branch', function(request, response) {
+	response.render('pages/branch');
+});
+
+app.get('/leaf', function(request, response) {
+	response.render('pages/leaf');
+});
+
 app.get('/db', function(req,res){
 	new MongoHelper({
 		db:'seismic-test',

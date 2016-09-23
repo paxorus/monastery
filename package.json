@@ -7,7 +7,6 @@
     "start": "node index.js"
   },
   "dependencies": {
-    "cool-ascii-faces": "1.3.3",
     "ejs": "2.3.3",
     "express": "^4.13.3",
     "mongodb": "^2.1.7"
@@ -17,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/heroku/node-js-getting-started.git"
+    "url": "git+https://github.com/paxorus/seismic-test.git"
   },
   "keywords": [
     "node",
@@ -26,8 +25,8 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/heroku/node-js-getting-started/issues"
+    "url": "https://github.com/paxorus/seismic-test/issues"
   },
-  "homepage": "https://github.com/heroku/node-js-getting-started#readme",
-  "author": ""
+  "homepage": "https://github.com/paxorus/seismic-test#readme",
+  "author": "Prakhar Sahay"
 }

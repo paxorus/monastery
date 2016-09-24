@@ -15,23 +15,36 @@ app.use(express.static(__dirname + '/public'));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
-app.get('/', function(request, response) {
-	response.render('pages/index');
+app.get('/', function(req, res) {
+	res.render('pages/index');
 });
 
-app.get('/forest', function(request, response) {
-	response.render('pages/forest');
+
+// db lookup should happen for below page loads, for now page will access localStorage
+
+app.get('/forest', function(req, res) {
+	res.render('pages/forest');
 });
 
-app.get('/branch', function(request, response) {
-	response.render('pages/branch');
+app.get('/branch/:parentId', function(req, res) {
+	var parentId = req.params.parentId;
+	res.render('pages/branch', {parentId: parentId});
 });
 
-app.get('/leaf', function(request, response) {
-	response.render('pages/leaf');
+app.get('/branch', function(req, res) {
+	res.render('pages/branch', {parentId: 'root'});
 });
 
-app.get('/db', function(req,res){
+app.get('/leaf/:issueId', function(req, res) {
+	var issueId = req.params.issueId;
+	res.render('pages/leaf', {issueId: issueId});
+});
+
+app.get('/leaf', function(req, res) {
+	res.render('pages/leaf', {issueId: 'root'});
+});
+
+app.get('/db', function(req, res){
 	new MongoHelper({
 		db:'seismic-test',
 		collection:'new',
@@ -76,7 +89,14 @@ app.delete('/db', function(req,res){
 	});
 });
 
+// app.use(function (err, req, res, next) {
+// 	console.error(err.stack);
+// 	res.status(404).send('Sorry, mate, we couldn\'t find this page');
+// 	res.status(500).send('Something broke!');
+// });
 
+
+// for the server console
 app.listen(app.get('port'), function() {
 	console.log('Node app is running on port', app.get('port'));
 });
@@ -85,7 +105,7 @@ app.listen(app.get('port'), function() {
 
 
 
-
+// perhaps move this abstraction into a module
 function MongoHelper(params){
 	var helper=this;
 	init("tectonic","2birds2stones");

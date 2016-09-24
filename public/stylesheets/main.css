@@ -69,11 +69,39 @@ button[type=button]:active {
 }
 
 /* LEAF */
-.container > div {
+#status, #parent {
   font-size: 24px;
+}
+#title {
+  font-size: 32px;
 }
 
 
+/* FOREST */
+.leaf-link {
+  cursor: pointer;
+  text-decoration: none;
+  color: #000000;
+  display: block;
+  padding-left: 20px;
+}
+.leaf-link:hover {
+  color: #33cc33;
+  background-color: #eeeeee;
+}
+.leaf-link:active {
+  color: #0088ff;
+}
+.leaf-desc {
+  color:#9d9d9d;
+}
+table {
+  font-size: 24px;
+  width: 100%;
+}
+td {
+  min-width: 125px;
+}
 
 #nav a, .noselect {
   -webkit-touch-callout: none; /* iOS Safari */

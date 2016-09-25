@@ -6,9 +6,8 @@
 
 var express = require('express');
 var app = express();
-var format = require('util').format;
 var querystring = require('querystring');
-var MongoHelper = require('./MongoHelper');
+var Mongo = require('./MongoHelper');
 
 app.set('port', (process.env.PORT || 5000));
 
@@ -47,50 +46,44 @@ app.get('/leaf', function(req, res) {
 	res.render('pages/leaf', {issueId: 'root'});
 });
 
-var config = {
-	db: 'seismic-test',
-	username: 'tectonic',
-	password: '2birds2stones'
-};
-
-
-
 app.get('/db', function (req, res) {
-	var db = new MongoHelper(config);
-	db.find('new', function (docs) {
+	Mongo.find('new', function (docs) {
 		res.render('pages/db', {docs: docs});
 	});
 });
 
 app.put('/db', function (req, res) {
-	// read in PUT body
-	var body = [];
-	req.on("data", function (chunk) {
-		body.push(chunk);
-	}).on("end", function () {
-		body = Buffer.concat(body).toString();
-		var data = querystring.parse(body);
-		var db = new MongoHelper(config);
-		db.insert('new', data, function (success) {
+	var dbInsert = function (data) {
+		Mongo.insert('new', data, function (success) {
 			res.send(success);
 		});
-	});
+	};
+
+	// read in PUT body
+	read(req, dbInsert);
 });
 
 app.delete('/db', function (req, res) {
+	var dbDelete = function (data) {
+		Mongo.delete('new', data, function (success) {
+			res.send(success)
+		});
+	}
+
 	// read in DELETE body
+	read(req, dbDelete);
+});
+
+function read(req, terminate) {
 	var body = [];
 	req.on("data", function (chunk) {
 		body.push(chunk);
 	}).on("end", function () {
 		body = Buffer.concat(body).toString();
 		var data = querystring.parse(body);
-		var db = new MongoHelper(config);
-		db.delete('new', data, function (success) {
-			res.send(success)
-		});
+		terminate(data);
 	});
-});
+}
 
 // make 404 pages
 // app.use(function (err, req, res, next) {
@@ -98,7 +91,6 @@ app.delete('/db', function (req, res) {
 // 	res.status(404).send('Sorry, mate, we couldn\'t find this page');
 // 	res.status(500).send('Something broke!');
 // });
-
 
 // for the server console
 app.listen(app.get('port'), function() {

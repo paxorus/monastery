@@ -1,5 +1,8 @@
-// Prakhar Sahay 02/26/2016
-// Requesters for PUT, POST, DELETE HTTP methods.
+/**
+ * Prakhar Sahay 02/26/2016
+ *
+ * Requesters for PUT, POST, DELETE HTTP methods.
+ */
 
 function putItem(){
 	var item=$("#addInput").val();

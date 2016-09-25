@@ -1,10 +1,9 @@
-/* Prakhar Sahay 09/23/2016
+/**
+ * Prakhar Sahay 09/23/2016
  *
  * Used by all EJS pages.
  */
 
-
-//
 var obj;
 
 if (localStorage.length == 0) {

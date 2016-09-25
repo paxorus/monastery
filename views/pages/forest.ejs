@@ -12,40 +12,22 @@
 
 <!-- add alphabetical/updated at sorts, tag/text filters -->
 
-<div class="container">
-List of Issues
-
-</div>
+<div class="container"></div>
 
 
 <script src="/javascripts/jquery.min.js"></script>
 <script src="/javascripts/ajax.js"></script>
 <script>
-	var obj = load();
-
-	// find balance between DOM reflow and responsiveness
-	var issueList = $("<table>", {id: "issue-list"});
+	// have pagination
+	// list all issues (find balance between DOM reflow and response time)
+	var issueList = $('<table>', {id: 'issue-list'});
 	obj.issues.forEach(function (issue) {
 		var issueDiv = makeIssueDiv(issue);
 		issueList.append(issueDiv);
 	});
 	$(".container").append(issueList);
 
-	function makeIssueDiv(issue) {
-		var issueRow = $('<tr>');
-		var issueDiv = $('<a>', {class: 'leaf-link', href: '/leaf/' + issue.id});
 
-		var title = $('<td>', {class: 'row-title'});
-		title.text(issue.title);
-		issueDiv.append(title);
-
-		var description = $('<td>', {class: 'leaf-desc'});
-		description.text(issue.description || 'add a description');
-		issueDiv.append(description);
-
-		issueRow.append(issueDiv);
-		return issueRow;
-	}
 </script>
 
 </body>

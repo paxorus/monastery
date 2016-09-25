@@ -11,15 +11,13 @@
 <% include ../partials/nav.ejs %>
 
 <div class="container">
-	<div style="font-size:32px">Open a new issue</div>
-
-	<div id="parent-issue">Extending <%= parentId %></div>
+	<div id="parent-issue">Branching from </div>
 
 	<form>
 		<input type="text" id="title" placeholder="Title">
 		<br />
 		<textarea id="description" placeholder="Describe the issue..." rows="4"></textarea>
-		<center><button type="button" id="submit">Create Issue</button></center>
+		<center><button type="button" id="submit">Open Issue</button></center>
 	</form>
 </div>
 
@@ -29,7 +27,10 @@
 <script>
 	var parentId = "<%= parentId %>";
 	var parent = find(parentId);
-	$("#parent-issue").text("Extending " + parent.title);
+
+	var parentTitle = $('<a>', {class: 'leaf-link', href: '/leaf/' + parentId});
+	parentTitle.text(parent.title);
+	$("#parent-issue").append(parentTitle);
 
 	$("#submit").click(function (evt) {
 

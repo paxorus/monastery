@@ -13,13 +13,24 @@
 <div class="container">
 	<div id="status"></div>
 	<!-- add parent -->
-	<div id="parent"></div>
+	<div id="parent">Nested under </div>
 	<!-- edit fields on click -->
-	<div id="title"></div>
+	<input type="text" id="title" placeholder="Text">
 	<br />
-	<div id="description"></div>
+	<textarea id="description" placeholder="Describe the issue..." rows="4"></textarea>
+	<!-- <div id="description"></div> -->
 	<center>
-		<button type="button" id="make-branch">Create a New Leaf</button>
+		<button type="button" id="save-changes">Save Changes</button>
+	</center>
+	
+	<div style="font-size:28px">Children</div>
+	<center>
+		<div class="horizontal-rule"></div>
+	</center>
+	<div id="child-list"></div>
+	<br />
+	<center>
+		<button type="button" id="make-branch">Branch off this Issue</button>
 	</center>
 
 </div>
@@ -28,31 +39,9 @@
 <script src="/javascripts/jquery.min.js"></script>
 <script src="/javascripts/ajax.js"></script>
 <script>
-
-
 	var issueId = "<%= issueId %>";
-	var issue = find(issueId);
-	var parentIssue = find(issue.parent);
-
-	// color status
-	$("#status").text(issue.status);
-
-	if (parentIssue) {
-		var parentLink = $('<a>', {class: 'leaf-link', href: '/leaf/' + parentIssue.id});
-		parentLink.text(parentIssue.title);
-		$("#parent").append(parentLink);
-	} else {
-		$("#parent").css('display', 'none');
-	}
-	$("#description").text(issue.description);
-	$("#title").text(issue.title);
-	// list children
-	// go to parent
-
-	$("#make-branch").click(function () {
-		location.href = "/branch/" + issueId;
-	});
 </script>
+<script src="/javascripts/pages/leaf.js"></script>
 
 </body>
 </html>

@@ -1,7 +1,8 @@
 /**
  * Prakhar Sahay 02/26/2016
  *
- * Main application server script. To run server: node index.js
+ * Main application server script.
+ * To run server: node index.js
  */
 
 var express = require('express');

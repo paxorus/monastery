@@ -14,38 +14,19 @@ if (localStorage.length == 0) {
 
 
 // spoof DB methods
-function load() {
-	return JSON.parse(localStorage.data);
-}
-
-function store(x) {
-	localStorage.data = JSON.stringify(x);
-}
-
-function drop() {
-	localStorage.clear();
-}
-
-function create() {
-	var now = new Date();
-	var rootIssue = {
-		id: "root",
-		title: "Life",
-		description: "",
-		status: "open",
-		parent: null,
-		children: [],
-		createdAt: now,
-		updatedAt: now
-	}
-	obj = {issues: [rootIssue]};
-	store(obj);
-}
 
 function find(id) {
 	return obj.issues.find(function (item) {
 		return id == item.id;
 	});
+}
+
+function update(issue) {
+	var idx = obj.issues.findIndex(function (item) {
+		return issue.id == item.id;
+	});
+	obj.issues[idx] = issue;
+	store(obj);
 }
 
 function insert(t, d, p) {
@@ -72,4 +53,52 @@ function makeid() {
         text += possible.charAt(Math.floor(Math.random() * possible.length));
     }
     return text;
+}
+
+
+// load, store, create, drop
+function load() {
+	return JSON.parse(localStorage.data);
+}
+
+function store(x) {
+	localStorage.data = JSON.stringify(x);
+}
+
+function create() {
+	var now = new Date();
+	var rootIssue = {
+		id: "root",
+		title: "Life",
+		description: "",
+		status: "open",
+		parent: null,
+		children: [],
+		createdAt: now,
+		updatedAt: now
+	}
+	obj = {issues: [rootIssue]};
+	store(obj);
+}
+
+function drop() {
+	localStorage.clear();
+}
+
+// forest.ejs, leaf.ejs
+function makeIssueDiv(issue) {
+	var issueRow = $('<tr>', {class: 'leaf-link forest-row'});
+	issueRow.click(function () {
+		location.href = '/leaf/' + issue.id;
+	});
+	var title = $('<td>');
+	title.text(issue.title);
+	issueRow.append(title);
+
+	var description = $('<td>', {class: 'leaf-desc'});
+	description.text(issue.description || 'no description');
+	issueRow.append(description);
+
+	// issueRow.append(issueDiv);
+	return issueRow;
 }

@@ -25,6 +25,7 @@ function update(issue) {
 	var idx = obj.issues.findIndex(function (item) {
 		return issue.id == item.id;
 	});
+	issue.updatedAt = new Date();
 	obj.issues[idx] = issue;
 	store(obj);
 }
@@ -35,7 +36,7 @@ function insert(t, d, p) {
 		id: makeid(),
 		title: t,
 		description: d,
-		status: "open",
+		open: true,
 		parent: p,
 		children: [],
 		createdAt: now,
@@ -71,7 +72,7 @@ function create() {
 		id: "root",
 		title: "Life",
 		description: "",
-		status: "open",
+		open: true,
 		parent: null,
 		children: [],
 		createdAt: now,

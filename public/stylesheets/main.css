@@ -38,7 +38,8 @@ body {
 /* fields must be type="text" explicitly */
 input[type=text], textarea, button[type=button] {
   font-family: 'Hind', sans-serif;
-  padding: 10px;
+  padding: 5px 10px;
+  margin: 5px 0;
   font-size: 24px;
   border: 2px solid rgba(0, 0, 0, 0);
   border-radius: 5px;
@@ -73,7 +74,7 @@ button[type=button]:active {
 }
 
 /* LEAF */
-#status, #parent {
+#parent {
   font-size: 24px;
 }
 #parent, #children {
@@ -89,13 +90,26 @@ button[type=button]:active {
 #save-changes {
   display: none;
 }
-#close-issue {
-  color: #ff0000;
+#reopen-issue, #close-issue {
+  border: 1px #0088ff solid;
   background-color: #ffffff;
-  border: 1px #ff0000 solid;
   font-size: 18px;
   width: auto;
   padding: 3px 7px;
+  display: none;
+}
+#reopen-issue {
+  color: #ff9900;
+  border-color: #ff9900;
+}
+#close-issue {
+  color: #ff0000;
+  border-color: #ff0000;
+}
+#reopen-issue:active, #close-issue:active {
+  color: #ffffff;
+  background-color: #0088ff;
+  border-color: #0088ff;
 }
 
 .horizontal-rule {

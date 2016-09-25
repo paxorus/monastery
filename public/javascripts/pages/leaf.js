@@ -7,8 +7,24 @@
 var issue = find(issueId);
 var parentIssue = find(issue.parent);
 
-// color status
-$("#status").text(issue.status);
+if (issue.open === true) {
+	$("#close-issue").toggle();
+} else {
+	$("#reopen-issue").toggle();
+}
+
+$("#close-issue").click(function () {
+	issue.open = false;
+	update(issue);
+	$("#close-issue").toggle();
+	$("#reopen-issue").toggle();
+});
+$("#reopen-issue").click(function () {
+	issue.open = true;
+	update(issue);
+	$("#close-issue").toggle();
+	$("#reopen-issue").toggle();
+});
 
 // sets parent link
 if (parentIssue) {
@@ -33,6 +49,9 @@ issue.children.forEach(function (childId, i) {
 	name.text(find(childId).title);
 	nameList.append(name);
 });
+if (issue.children.length == 0) {
+	nameList.text('nothing');
+}
 $("#children").append(nameList);
 
 // edit and make-branch event listeners

@@ -23,13 +23,17 @@ $("#title").val(issue.title);
 
 
 // list children (find balance between DOM reflow and response time)
-var issueList = $('<table>', {id: 'issue-list'});
-issue.children.forEach(function (childId) {
-	var child = find(childId);
-	var issueDiv = makeIssueDiv(child);
-	issueList.append(issueDiv);
+var nameList = $("<span>");
+nameList.css('color', '#000000');
+issue.children.forEach(function (childId, i) {
+	if (i > 0) {
+		nameList.append(', ');
+	}
+	var name = $('<a>', {class: 'leaf-link'});
+	name.text(find(childId).title);
+	nameList.append(name);
 });
-$("#child-list").append(issueList);
+$("#children").append(nameList);
 
 // edit and make-branch event listeners
 $("#title").on('input', function () {

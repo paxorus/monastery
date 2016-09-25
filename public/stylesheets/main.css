@@ -76,8 +76,12 @@ button[type=button]:active {
 #status, #parent {
   font-size: 24px;
 }
-#parent {
+#parent, #children {
   color: #33cc33;
+  margin-left: 10px;
+}
+#children {
+  font-size: 18px;
 }
 #title {
   font-size: 32px;
@@ -85,11 +89,18 @@ button[type=button]:active {
 #save-changes {
   display: none;
 }
+#close-issue {
+  color: #ff0000;
+  background-color: #ffffff;
+  border: 1px #ff0000 solid;
+  font-size: 18px;
+  width: auto;
+  padding: 3px 7px;
+}
 
 .horizontal-rule {
   height: 1px;
   background-color: #9d9d9d;
-  /*width: 90%;*/
 }
 
 

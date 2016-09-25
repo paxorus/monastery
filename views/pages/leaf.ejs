@@ -11,23 +11,22 @@
 <% include ../partials/nav.ejs %>
 
 <div class="container">
-	<div id="status"></div>
-	<!-- add parent -->
-	<div id="parent">Nested under </div>
-	<!-- edit fields on click -->
+	<div id="status"></div><button type="button" id="close-issue">Close Issue</button>
 	<input type="text" id="title" placeholder="Text">
-	<br />
+	<div id="parent">Nested under </div>
+	<div id="children">Nests </div>
 	<textarea id="description" placeholder="Describe the issue..." rows="4"></textarea>
-	<!-- <div id="description"></div> -->
+
 	<center>
 		<button type="button" id="save-changes">Save Changes</button>
 	</center>
-	
-	<div style="font-size:28px">Children</div>
+	<div style="font-size:28px">Comments</div>
 	<center>
 		<div class="horizontal-rule"></div>
 	</center>
-	<div id="child-list"></div>
+	<textarea id="description" placeholder="Add a comment..." rows="2"></textarea>
+
+
 	<br />
 	<center>
 		<button type="button" id="make-branch">Branch off this Issue</button>

@@ -36,7 +36,7 @@ body {
 /* BRANCH */
 
 /* fields must be type="text" explicitly */
-input[type=text], textarea, button[type=button] {
+input[type=text], textarea, .major-button, .white-button {
   font-family: 'Hind', sans-serif;
   padding: 5px 10px;
   margin: 5px 0;
@@ -59,13 +59,13 @@ input[type=text]:focus, textarea:focus{
   cursor: text;
 }
 
-button[type=button] {
+.major-button {
   background-color: #33cc33;
   width: 50%;
   color: white;
 }
 
-button[type=button]:active {
+.major-button:active {
   background-color: #0088ff;
 }
 
@@ -130,9 +130,6 @@ td {
 td:nth-child(2) {
   font-size: 18px;
 }
-/*td:nth-child(2) {
-  color: #9d9d9d;
-}*/
 
 .forest-row:hover {
   background-color: #eeeeee;
@@ -148,10 +145,6 @@ td:nth-child(2) {
 .leaf-link:active {
   color: #0088ff;
 }
-/*.leaf-desc {
-  color: #9d9d9d;
-}*/
-
 
 #nav a, .noselect {
   -webkit-touch-callout: none; /* iOS Safari */

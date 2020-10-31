@@ -11,10 +11,8 @@
 <% include ../partials/nav.ejs %>
 
 <div class="container">
-	<div id="status">
-		<button type="button" id="close-issue" class="white-button">Close Issue</button>
-		<button type="button" id="reopen-issue" class="white-button">Reopen Issue</button>
-	</div>
+	<button type="button" id="close-issue" class="white-button">Close Issue</button>
+	<button type="button" id="reopen-issue" class="white-button">Reopen Issue</button>
 	<input type="text" id="title" placeholder="Text">
 	<div id="parent">Nested under </div>
 	<div id="children">Nests </div>
@@ -32,7 +30,7 @@
 
 	<br />
 	<center>
-		<button type="button" id="make-branch">Branch off this Issue</button>
+		<button class="major-button" id="make-branch">Branch off this Issue</button>
 	</center>
 
 </div>

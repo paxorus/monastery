@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <%- include("../partials/header.ejs") %>
+	<title>SeismicJS</title>
+	<link rel="stylesheet" href="/stylesheets/db.css">
+</head>
+
+<body>
+
+<%- include("../partials/nav.ejs") %>
+
+<!-- add alphabetical/updated at sorts, tag/text filters -->
+
+<div class="container"></div>
+
+
+<script src="/javascripts/jquery.min.js"></script>
+<script src="/javascripts/ajax.js"></script>
+<script>
+	// have pagination
+	// list all issues (find balance between DOM reflow and response time)
+	var issueList = $('<table>', {id: 'issue-list'});
+	obj.issues.forEach(function (issue) {
+		var issueDiv = makeIssueDiv(issue);
+		issueList.append(issueDiv);
+	});
+	$(".container").append(issueList);
+
+
+</script>
+
+</body>
+</html>

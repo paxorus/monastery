@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <%- include("../partials/header.ejs") %>
+	<title>SeismicJS</title>
+	<link rel="stylesheet" href="/stylesheets/db.css">
+</head>
+
+<body>
+
+<%- include("../partials/nav.ejs") %>
+
+<div class="container">
+	<div id="parent-issue">Branching from </div>
+
+	<form>
+		<input type="text" id="title" placeholder="Title">
+		<br />
+		<textarea id="description" placeholder="Describe the issue..." rows="4"></textarea>
+		<center><button class="major-button" id="submit">Open Issue</button></center>
+	</form>
+</div>
+
+
+<script src="/javascripts/jquery.min.js"></script>
+<script src="/javascripts/ajax.js"></script>
+<script>
+	var parentId = "<%= parentId %>";
+	var parent = find(parentId);
+
+	var parentTitle = $('<a>', {class: 'leaf-link', href: '/leaf/' + parentId});
+	parentTitle.text(parent.title);
+	$("#parent-issue").append(parentTitle);
+
+	$("#submit").click(function (evt) {
+
+		// do validity check, mark empty fields
+		// blurring should also correct invalid chars
+		var issue = insert($("#title").val(), $("#description").val(), parentId);
+		find(parentId).children.push(issue.id);
+		store(obj);
+		location.href = '/leaf/' + issue.id;
+	});
+
+</script>
+
+</body>
+</html>

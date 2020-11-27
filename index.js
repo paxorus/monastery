@@ -19,7 +19,7 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
 app.get('/', function(req, res) {
-	res.render('pages/index');
+	res.render('pages/forest');
 });
 
 
@@ -48,14 +48,14 @@ app.get('/leaf', function(req, res) {
 });
 
 app.get('/db', function (req, res) {
-	Mongo.find('new', function (docs) {
+	Mongo.find('elements', function (docs) {
 		res.render('pages/db', {docs: docs});
 	});
 });
 
 app.put('/db', function (req, res) {
 	var dbInsert = function (data) {
-		Mongo.insert('new', data, function (success) {
+		Mongo.insert('elements', data, function (success) {
 			res.send(success);
 		});
 	};
@@ -66,7 +66,7 @@ app.put('/db', function (req, res) {
 
 app.delete('/db', function (req, res) {
 	var dbDelete = function (data) {
-		Mongo.delete('new', data, function (success) {
+		Mongo.delete('elements', data, function (success) {
 			res.send(success)
 		});
 	}

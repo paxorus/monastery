@@ -7,9 +7,9 @@
     "start": "node index.js"
   },
   "dependencies": {
-    "ejs": "2.3.3",
-    "express": "^4.13.3",
-    "mongodb": "^2.1.7"
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
+    "mongodb": "^3.6.2"
   },
   "engines": {
     "node": "0.12.7"

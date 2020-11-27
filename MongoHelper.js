@@ -4,28 +4,31 @@
  * Abstraction layer for MongoClient.
  */
 
-var mongoConfig = require('./mongoConfig');
 var MongoClient = require('mongodb').MongoClient;
 
 var promise;
 
 exports.connect = function () {
 	promise = new Promise(function (resolve, reject) {
-		var url = mongoConfig.url();
-		MongoClient.connect(url, function(err, db) {
+		const username = "elements-reader-writer";
+		password = "LDwRv4PYpGMfLGuT";
+
+		const url = `mongodb+srv://${username}:${password}@cluster0.dv8ga.mongodb.net?retryWrites=true&w=majority`;
+		const client = new MongoClient(url, {useNewUrlParser: true, useUnifiedTopology: true});
+		client.connect(err => {
 			if (err) {
 				reject(err);
 			}
-			resolve(db);
+			resolve(client);
 		});
 	});
 }
 
 exports.find = function (collection, then) {
 	exports.connect();
-	promise.then(function (db) {
+	promise.then(function (client) {
 		var docs = [];
-		var cursor = db.collection(collection).find();
+		var cursor = client.db("main-db").collection(collection).find();
 
 		cursor.each(function(err, doc) {
 			if (err) {
@@ -34,7 +37,7 @@ exports.find = function (collection, then) {
 			if (doc != null) {
 				docs.push(doc);
 			} else {
-				db.close();
+				client.close();
 				then(docs);
 			}
 		});
@@ -43,12 +46,12 @@ exports.find = function (collection, then) {
 
 exports.insert = function (collection, data, then) {
 	exports.connect();
-	promise.then(function (db) {
-		db.collection(collection).insertOne({name: data.name}, function (err, result) {
+	promise.then(function (client) {
+		client.db("main-db").collection(collection).insertOne({name: data.name}, function (err, result) {
 			if (err) {
 				throw err;
 			}
-			db.close();
+			client.close();
 			then(result);
 		});
 	});
@@ -56,12 +59,12 @@ exports.insert = function (collection, data, then) {
 
 exports.delete = function (collection, data, then) {
 	exports.connect();
-	promise.then(function (db) {
-		db.collection(collection).deleteOne({name: data.name}, function (err, result) {
+	promise.then(function (client) {
+		client.db("main-db").collection(collection).deleteOne({name: data.name}, function (err, result) {
 			if (err) {
 				throw err;
 			}
-			db.close();
+			client.close();
 			then(result);
 		});
 	});
